@@ -6,7 +6,7 @@ using AutoMapper;
 using DireoWebApi.Data;
 using DireoWebApi.Helpers;
 using DireoWebApi.Models;
-using DireoWebApi.Models.NewFolder.DTOs.UserDTOs;
+using DireoWebApi.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,16 +27,20 @@ namespace DireoWebApi.Controllers.V1
             _mapper = mapper;
         }
 
+
+        /*Get All Users*/
         [HttpGet]
         public async Task<object> Get()
         {
-            return Ok(await _context.Users.ToListAsync());
+            var model = await _context.Users.Include("Socials").ToListAsync();
+            return Ok(_mapper.Map<List<UserGetDTO>>(model));
         }
 
+        /*Get User By Id*/
         [HttpGet("{id}")]
         public async Task<object> Get(string id)
         {
-            User user = await _context.Users.FindAsync(id);
+            User user = await _context.Users.Include("Socials").FirstOrDefaultAsync(u=>u.Id==id);
 
             #region CheckIsNull
             if (user == null)
@@ -45,9 +49,10 @@ namespace DireoWebApi.Controllers.V1
             }
             #endregion
 
-            return Ok(user);
+            return Ok(_mapper.Map<UserGetDTO>(user));
         }
 
+        /*Update User Info*/
         [HttpPut]
         [Authorize]
         public async Task<object> Put(UserUpdateDTO usr)
@@ -102,20 +107,24 @@ namespace DireoWebApi.Controllers.V1
             }
 
             /*Crete or Update User's socials*/
-            if (usr.SocialForUserUpdateDTOs!=null)
+            if (usr.Socials!=null)
             {
-                foreach (var scl in usr.SocialForUserUpdateDTOs)
+                foreach (var scl in usr.Socials)
                 {
                     if (string.IsNullOrWhiteSpace(scl.Id))
                     {
-                        Social social = new Social
+                        if(! await _context.Socials.AnyAsync(s=>s.UserId==user.Id && s.Name==scl.Name && s.Link == scl.Link))
                         {
-                            Name = scl.Name,
-                            Link = scl.Link,
-                            Type = SocialType.User,
-                            UserId = usr.Id
-                        };
-                        await _context.Socials.AddAsync(social);
+                            Social social = new Social
+                            {
+                                Name = scl.Name,
+                                Link = scl.Link,
+                                Type = SocialType.User,
+                                UserId = usr.Id
+                            };
+                            await _context.Socials.AddAsync(social);
+                        }
+                        continue;
                     }
                     else
                     {
@@ -173,7 +182,7 @@ namespace DireoWebApi.Controllers.V1
             string filename = " ";
             try
             {
-                filename = FileManager.Upload(photo.FileRaw);
+                filename = FileManager.Upload(photo.FileRaw,photo.FileName);
             }
             catch (Exception)
             {

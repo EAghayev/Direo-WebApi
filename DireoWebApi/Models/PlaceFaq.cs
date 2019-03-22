@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace DireoWebApi.Models
 {
-    public class PlaceSliderPhotos
+    public class PlaceFaq
     {
         [MaxLength(36)]
         public string Id { get; set; }
 
-        public string Photo { get; set; }
+        [Required]
+        [MaxLength(500,ErrorMessage ="Question cannot exceed 500 characters")]
+        public string Question { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Photo name cannot exceed 10 characters")]
-        public string PhotoName { get; set; }
+        [Required]
+        [MaxLength(500, ErrorMessage = "Question cannot exceed 500 characters")]
+        public string Answer { get; set; }
 
         [MaxLength(36)]
         public string PlaceId { get; set; }

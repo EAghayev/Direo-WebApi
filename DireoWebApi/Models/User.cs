@@ -45,7 +45,5 @@ namespace DireoWebApi.Models
         
         public List<Social> Socials { get; set; }
         public List<Place> Places { get; set; }
-
-
     }
 }

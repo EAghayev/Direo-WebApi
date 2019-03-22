@@ -1,4 +1,4 @@
-﻿using DireoWebApi.Models.NewFolder.DTOs.SocialDTOs;
+﻿using DireoWebApi.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DireoWebApi.Models.NewFolder.DTOs.UserDTOs
+namespace DireoWebApi.Models.DTOs
 {
     public class UserUpdateDTO
     {
@@ -40,6 +40,6 @@ namespace DireoWebApi.Models.NewFolder.DTOs.UserDTOs
         [Column(TypeName = "tinyint")]
         public Gender? Gender { get; set; }
 
-        public List<SocialForUserUpdateDTO> SocialForUserUpdateDTOs { get; set; }
+        public List<SocialForUserOrPlaceDTO> Socials { get; set; }
     }
 }

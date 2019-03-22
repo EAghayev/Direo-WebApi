@@ -5,19 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DireoWebApi.Models
+namespace DireoWebApi.Models.DTOs
 {
-    public enum Gender
+    public class PlacePostDTO
     {
-        Male = 1,
-        Female = 2,
-        Other = 3
-    }
-    public class Place
-    {
-        [MaxLength(36)]
-        public string Id { get; set; }
-
         [MaxLength(150, ErrorMessage = "Name cannot exceed 150 characters")]
         public string Name { get; set; }
 
@@ -25,13 +16,12 @@ namespace DireoWebApi.Models
 
         public int ReviewCount { get; set; }
 
-        [Column(TypeName ="nvarchar(MAX)")]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string Desc { get; set; }
 
         [MaxLength(250, ErrorMessage = "Short Desc cannot exceed 250 characters")]
         public string ShortDesc { get; set; }
 
-        [MaxLength(100)]
         public string Photo { get; set; }
 
         [MaxLength(100, ErrorMessage = "Photo name cannot exceed 100 characters")]
@@ -39,8 +29,8 @@ namespace DireoWebApi.Models
 
         [MaxLength(250)]
         public string Video { get; set; }
-       
-        [Column(TypeName ="tinyint")]
+
+        [Column(TypeName = "tinyint")]
         public Gender Gender { get; set; }
 
         [Column(TypeName = "money")]
@@ -49,7 +39,7 @@ namespace DireoWebApi.Models
         [MaxLength(100, ErrorMessage = "Phone cannot exceed 100 characters")]
         public string Phone { get; set; }
 
-        public DateTime?CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
 
         public bool HideContactInfo { get; set; }
 
@@ -73,15 +63,5 @@ namespace DireoWebApi.Models
         public string CategoryId { get; set; }
         [MaxLength(36)]
         public string UserId { get; set; }
-
-        public Category Category { get; set; }
-        public User User { get; set; }
-        public City City { get; set; }
-        public List<PlacesTags> PlacesTags { get; set; }
-        public List<PlaceFaq> PlaceFaqs { get; set; }
-        public List<WorkHour> WorkHours { get; set; }
-        public List<PlaceSliderPhotos> PlaceSliderPhotos { get; set; }
-        public List<Social> Socials { get; set; }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DireoWebApi.Models;
-using DireoWebApi.Models.NewFolder.DTOs.UserDTOs;
+using DireoWebApi.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,31 @@ namespace DireoWebApi.Mappings
             CreateMap<UserSignUpDTO, User>().ReverseMap();
 
             CreateMap<User, UserGetDTO>().ReverseMap();
+
+            CreateMap<PlacePostDTO, Place>().ReverseMap();
+
+            /*Faq Mapping*/
+            CreateMap<PlaceFaq, FaqDTO>().ReverseMap();
+            CreateMap<FaqDTO, PlaceFaq>().ReverseMap();
+
+            /*Tag Mapping*/
+            CreateMap<Tag, TagDTO>().ReverseMap();
+            CreateMap<TagDTO, Tag>().ReverseMap();
+
+            /*Hours Mapping*/
+            CreateMap<WorkHour, WorkHoursDTO>().ReverseMap();
+            CreateMap<WorkHoursDTO, WorkHour>().ReverseMap();
+
+            /*Slider Photos Mapping*/
+            CreateMap<PlaceSliderPhotos, PlaceSliderPhotoDTO>().ReverseMap();
+            CreateMap<PlaceSliderPhotoDTO, PlaceSliderPhotos>().ReverseMap();
+
+            /*Socials Mapping*/
+            CreateMap<Social, SocialForUserOrPlaceDTO>().ReverseMap();
+            CreateMap<SocialForUserOrPlaceDTO, Social>().ReverseMap();
+
+            /*Place mapping*/
+            CreateMap<Place, PlaceGetDTO>().ReverseMap();
 
         }
     }

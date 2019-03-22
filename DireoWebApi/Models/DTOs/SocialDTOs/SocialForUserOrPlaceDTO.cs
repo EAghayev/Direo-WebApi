@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DireoWebApi.Models.NewFolder.DTOs.SocialDTOs
+namespace DireoWebApi.Models.DTOs
 {
-    public class SocialForUserUpdateDTO
+    public class SocialForUserOrPlaceDTO
     {
         [MaxLength(36)]
         public string Id { get; set; }
@@ -18,5 +18,11 @@ namespace DireoWebApi.Models.NewFolder.DTOs.SocialDTOs
         [Required]
         [MaxLength(250, ErrorMessage = "Social media URL cannot exceed 250 characters")]
         public string Link { get; set; }
+
+        [MaxLength(36)]
+        public string PlaceId { get; set; }
+
+        [MaxLength(36)]
+        public string UserId { get; set; }
     }
 }

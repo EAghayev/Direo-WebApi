@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DireoWebApi.Models.NewFolder.DTOs.UserDTOs
+namespace DireoWebApi.Models.DTOs
 {
-    public class UserGetDTO
+    public class UserGetForPlaceDTO
     {
         public string Id { get; set; }
 

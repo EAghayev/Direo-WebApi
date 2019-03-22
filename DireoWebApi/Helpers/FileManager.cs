@@ -9,7 +9,7 @@ namespace DireoWebApi.Helpers
 {
     public static class FileManager
     {
-        public static string Upload(string FileRaw)
+        public static string Upload(string FileRaw,string Filename)
         {
 
             string data = "";
@@ -46,16 +46,18 @@ namespace DireoWebApi.Helpers
                 Position = 0
             };
 
-            string filename = DateTime.Now.ToString("yyyyMMddHHmmssfff") + "." + ext;
+            int i = Filename.LastIndexOf('.');
+            Filename = Filename.Substring(0, i);
+            string newfilename =Filename + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "." + ext;
 
             var path = Path.Combine(
-                Directory.GetCurrentDirectory(), "wwwroot/uploads", filename);
+                Directory.GetCurrentDirectory(), "wwwroot/uploads", newfilename);
 
             FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write);
 
             imageDataStream.WriteTo(file);
 
-            return filename;
+            return newfilename;
         }
 
         public static bool Delete(string FileName)

@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DireoWebApi.Models
+namespace DireoWebApi.Models.DTOs
 {
-    public class PlaceFaqs
+    public class FaqDTO
     {
         [MaxLength(36)]
         public string Id { get; set; }
 
         [Required]
-        [MaxLength(500,ErrorMessage ="Question cannot exceed 500 characters")]
+        [MaxLength(500, ErrorMessage = "Question cannot exceed 500 characters")]
         public string Question { get; set; }
 
         [Required]
@@ -21,7 +21,5 @@ namespace DireoWebApi.Models
 
         [MaxLength(36)]
         public string PlaceId { get; set; }
-
-        public Place Place { get; set; }
     }
 }

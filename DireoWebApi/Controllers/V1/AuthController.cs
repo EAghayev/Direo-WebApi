@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DireoWebApi.Data;
 using DireoWebApi.Models;
-using DireoWebApi.Models.NewFolder.DTOs.UserDTOs;
+using DireoWebApi.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DireoWebApi.Helpers;
