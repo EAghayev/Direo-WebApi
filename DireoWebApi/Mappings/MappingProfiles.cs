@@ -43,8 +43,9 @@ namespace DireoWebApi.Mappings
             CreateMap<SocialForUserOrPlaceDTO, Social>().ReverseMap();
 
             /*Place mapping*/
-            CreateMap<Place, PlaceGetDTO>().ReverseMap();
-
+            CreateMap<Place, PlaceGetDTO>()
+                .ForMember(dest=>dest.Tags,from=>from
+                .MapFrom(s=>s.PlacesTags.Select(pt=>pt.Tag)));
         }
     }
 }
